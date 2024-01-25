@@ -1,0 +1,65 @@
+<div class="page-main-header" [class.open]="open">
+  <div class="main-header-right row">
+    <div class="main-header-left d-lg-none">
+      <div class="logo-wrapper"><a [routerLink]="'/dashboard/default'"><img class="blur-up lazyloaded"
+            src="assets/images/dashboard/GST-COM-logo.png" alt=""></a></div>
+    </div>
+    <div class="mobile-sidebar">
+      <div class="media-body text-right switch-sm">
+        <label class="switch">
+          <a>
+            <app-feather-icons id="sidebar-toggle" [icon]="'align-left'" (click)="collapseSidebar()">
+            </app-feather-icons>
+          </a>
+        </label>
+      </div>
+    </div>
+    <div class="nav-right col">
+      <ul class="nav-menus" [ngClass]="{'open' : openNav}">
+        <li class="onhover-dropdown">
+          <a class="txt-dark" href="javascript:void(0)" data-lng="gb">
+            <i class="flag-icon flag-icon-{{lang.iso}}"></i>
+            {{lang.name}}
+          </a>
+          <!--<ul class="language-dropdown onhover-show-div p-20">
+            <li *ngFor="let locale of locales"><a href="javascript:void(0)" (click)="changeLanguage(locale)" data-lang="{{locale.iso}}"><i class="flag-icon flag-icon-{{locale.iso}}"></i>
+                {{locale.name}}</a></li>
+
+          </ul>-->
+        </li>
+        <li class="onhover-dropdown">
+          <a class="txt-dark" href="javascript:void(0)" data-lng="gb">
+            {{yearSelected}}
+          </a>
+          <ul class="language-dropdown onhover-show-div p-20">
+            <li *ngFor="let year of yearsArray">
+              <a href="javascript:void(0)" (click)="changerYear(year)"><i ></i>{{year}}</a>
+            </li>
+          </ul>
+        </li>
+        <!--<select data-width="fit" name="" id="" class="form-control dropdown col-md-1" (change)="changeLanguage($event.target.value)">
+          <option value="" disabled selected>Choisir la langue</option>
+          <option value="gb" [selected]="lang==='gb'" data-content='<span class="flag-icon flag-icon-gb"></span> English'> English</option>
+        </select>-->
+        <li class="onhover-dropdown">
+          <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle"
+              src="assets/images/user.png" alt="header-user">
+
+            <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
+          </div>
+          <ul class="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
+            <li><a [routerLink]="'/settings/profile'">
+                <app-feather-icons [icon]="'user'"></app-feather-icons>Edit Profile
+              </a></li>
+            <li><a (click)="logoutUser()">
+                <app-feather-icons [icon]="'log-out'"></app-feather-icons>Logout
+              </a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="d-lg-none mobile-toggle pull-right" (click)="openMobileNav()">
+        <app-feather-icons [icon]="'more-horizontal'"></app-feather-icons>
+      </div>
+    </div>
+  </div>
+</div>

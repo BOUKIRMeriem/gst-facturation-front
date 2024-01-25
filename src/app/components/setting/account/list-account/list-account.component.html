@@ -1,0 +1,101 @@
+<p-toast></p-toast>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card tab2-card">
+        <div class="card-body">
+          <div class="p-d-flex p-ai-center p-jc-between">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                   placeholder="Search..." />
+                        </span>
+            <button class="btn btn-primary mr-1 mb-3" (click)="onClickAdd()" style="float: right;">Ajouter</button>
+          </div><br />
+          <div class="clearfix"></div>
+          <div class="card">
+              <p-table #dt2 [value]="listAccounts" selectionMode="multiple"
+                       [metaKeySelection]="true"
+                       styleClass="p-datatable-sm" [rows]="50" [paginator]="true"
+                       [globalFilterFields]="['email','user.firstName','user.lastName','user.phoneNumber','user.userName']"
+                       responsiveLayout="scroll" [rowHover]="true" dataKey="id" [resizableColumns]="true"
+                       [autoLayout]="true" [showCurrentPageReport]="true" >
+              <ng-template pTemplate="header">
+                <tr style="font-size: medium;">
+                  <th *ngFor="let col of atrAccount" pSortableColumn="{{col.field}}"
+                      [style.width]="col.width">
+                    {{col.header}} <p-sortIcon field="{{col.field}}"></p-sortIcon>
+
+                  </th>
+
+                  <th style="width: 6rem">Action</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-mat>
+                <tr style="height: 25px;font-size: medium;" [pSelectableRow]="mat" (dblclick)="onClickEdit(mat)">
+                  <td>{{mat.user.firstName}}</td>
+                  <td>{{mat.user.lastName}}</td>
+                  <td>{{mat.user.userName}}</td>
+                  <td>{{mat.email}}</td>
+                  <td>{{mat.user.phoneNumber}}</td>
+                  <td><a href="javascript:;" (click)="onClickEdit(mat)" title="Modifier"
+                         class="text text-warning"><i class="fa fa-edit"></i>&nbsp;|&nbsp;</a>
+                    <a  (click)="setToDelete(mat.id)"
+                        (click)="open(deleteModal)" title="Supprimer" href="javascript:;" class="text text-danger"><i
+                      class="fa fa-trash"></i></a>
+                  </td>
+
+                </tr>
+              </ng-template>
+
+            </p-table>
+            <ng-template #deleteModal let-modal>
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title f-w-600">supprimer
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="container" style="padding: 20px 20px;">
+                    <div style="text-align: center;margin-bottom: 15px;  ">
+                      <i class="fa fa-exclamation-triangle fa-5x"
+                         style="text-align: center; color: red;" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div style="margin-bottom: 20px;">
+                    <h4 style="text-align: center;">
+                      Êtes-vous sûr?
+                    </h4>
+                  </div>
+                  <div style="text-align: center; color: whitesmoke; margin-bottom: 20px;">
+                    <p style="line-height:15px;">
+                      Voulez-vous vraiment supprimer cet enregistrement ? Ce processus ne peut pas
+                      être annulé.</p>
+                  </div>
+
+                </div>
+                <div class="modal-footer" style="text-align: center;">
+
+                  <button type="button" class="btn btn-primary" href="javascript:;"
+                          (click)="onClickDelete()" (click)="modal.dismiss('Cross click')">
+                    Supprimer
+                  </button>
+                  &nbsp;
+                  <button type="button" class="btn btn-secondary"
+                          (click)="modal.dismiss('Cross click')" href="javascript:;" data-dismiss="modal">
+
+                    Annuler
+                  </button>
+
+                </div>
+              </div>
+
+            </ng-template>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+:host ::ng-deep .needs-validation input.bg-red {
+  direction:rtl;
+  width: 50%;
+}
+
+:host ::ng-deep .multiselect-dropdown .dropdown-btn .selected-item {
+  max-width: 300px;
+}
+
+:host ::ng-deep .p-checkbox-box {
+  margin-top: 17px;
+}
+:host ::ng-deep .p-dropdown {
+  width: 20rem;
+}

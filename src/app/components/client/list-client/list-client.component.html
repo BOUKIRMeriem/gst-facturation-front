@@ -1,0 +1,104 @@
+<p-toast></p-toast>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card tab2-card">
+                <div class="card-body">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" style="width: 160%;"
+                                (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                        </span>
+                        <div style="float: right;">
+                            <button class="btn btn-primary mr-1 mb-3" style="float: right;"
+                                (click)="addClient()">Ajouter un Client</button>
+                        </div>
+                    </div><br />
+                    <div class="clearfix"></div>
+                    <div class="card">
+                        <p-table #dt2 [value]="listClients"  selectionMode="multiple"
+                            [metaKeySelection]="true"
+                            styleClass="p-datatable-sm" [rows]="40" [paginator]="true"
+                            [globalFilterFields]="['code','name','phone','email','solde']" responsiveLayout="scroll"
+                            [rowHover]="true" dataKey="id" [resizableColumns]="true" [autoLayout]="true">
+                            <ng-template pTemplate="header">
+                                <tr style="font-size: 14px;">
+                                    <th *ngFor="let col of atrClient" pSortableColumn="{{col.field}}"
+                                        [style.width]="col.width" style="text-align: center">
+                                        {{col.header}} <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                                    </th>
+
+                                    <th style="width: 6rem">Action</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-client>
+                                <tr style="height: 25px;font-size: 14px;" [pSelectableRow]="client"
+                                    (dblclick)="onRowDblClick($event, client)">
+                                    <td>{{client.code}}</td>
+                                    <td>{{client.name}}</td>
+                                  <td>{{client.email}}</td>
+                                  <td>{{client.phone}}</td>
+                                    <td style="text-align:right;">{{client.solde | number : '1.2-2' | removeComma}}
+                                    </td>
+                                    <td>
+                                        <a (click)="onClickEditClient(client.id)" title="Modifier"
+                                            href="javascript:;" class="text text-warning"><i
+                                                class="fa fa-edit"></i>&nbsp;|&nbsp;</a>
+                                        <a  (click)="setClientToDelete(client.id)" title="Supprimer"
+                                            (click)="open(deleteModal)" href="javascript:;" class="text text-danger"><i
+                                                class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <ng-template #deleteModal let-modal>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title f-w-600" id="myModal_delete_produit">Supprimer le client
+                                    </h5>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container" style="padding: 20px 20px;">
+                                        <div style="text-align: center;margin-bottom: 15px;  ">
+                                            <i class="fa fa-exclamation-triangle fa-5x"
+                                                style="text-align: center; color: red;" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 20px;">
+                                        <h4 style="text-align: center;">
+                                            Êtes-vous sûr?
+                                        </h4>
+                                    </div>
+                                    <div style="text-align: center; color: whitesmoke; margin-bottom: 20px;">
+                                        <p style="line-height:15px;">
+                                            Voulez-vous vraiment supprimer cet enregistrement ? Ce processus ne peut pas
+                                            être annulé.</p>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer" style="text-align: center;">
+
+                                    <button type="button" class="btn btn-primary" href="javascript:;"
+                                        (click)="onClickDeleteclient()" (click)="modal.dismiss('Cross click')">
+                                        Supprimer
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" class="btn btn-secondary"
+                                        (click)="modal.dismiss('Cross click')" href="javascript:;" data-dismiss="modal">
+
+                                        Annuler
+                                    </button>
+
+
+                                </div>
+                            </div>
+
+                        </ng-template>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

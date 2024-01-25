@@ -1,0 +1,23 @@
+{
+	"footer": {
+		"copyright": "Derechos de autor",
+		"hello": "Hola",
+		"madeBy": "Hecho a mano por SAT y hecho con",
+		"rights": "SAT Todos los derechos reservados"
+	},
+	"sidebar": {
+		"coupons": "Cupones",
+		"dashboard": "Tablero",
+		"invoice": "FACTURA",
+		"localization": "Localización",
+		"login": "Iniciar sesión",
+		"media": "medios de comunicación",
+		"menus": "Los menús",
+		"pages": "Páginas",
+		"products": "productos",
+		"reports": "informes",
+		"sales": "Ventas",
+		"settings": "Ajustes",
+		"vendors": "Vendedores"
+	}
+}

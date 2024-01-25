@@ -1,0 +1,24 @@
+.card .card-body {
+    padding: 10px;
+}
+
+:host ::ng-deep input.bg-sldd.p-inputnumber-input.p-inputtext.p-component.p-filled {
+  direction:rtl;
+  margin-top: -8px;
+  border: 0px;
+  font-weight : bold;
+}
+
+:host ::ng-deep .needs-validation input.bg-red {
+  direction:rtl;
+}
+
+:host ::ng-deep a#soldd.nav-link{
+  float: right !important;
+  position: absolute !important;
+  right : 15px !important;
+}
+
+:host ::ng-deep .multiselect-dropdown .dropdown-btn .selected-item {
+  max-width: 300px;
+}

@@ -1,0 +1,207 @@
+<form [formGroup]="factureClientForm" *ngIf="factureClientForm" (ngSubmit)="saveFacture()" novalidate>
+  <div class="modal-header">
+    <h5 *ngIf="isAddMode">Ajouter Facture</h5>
+    <h5 *ngIf="!isAddMode">{{title}}</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <fieldset class="text-semibold">
+      <legend><i class="icon-reading position-left"></i> Générale</legend>
+                <div class="digital-add needs-validation">
+                  <div class="form-group row">
+                    <div class="col-sm-3">
+                      <label for="numPiece" class="col-form-label"><span>*</span>
+                        N°Piéce :</label>
+                      <input class="form-control" id="numPiece" type="text" required=""
+                             formControlName="numPiece">
+                      <div *ngIf="numPiece.invalid && (numPiece.touched || numPiece.dirty)"
+                           class="text text-danger">
+                        <div *ngIf="numPiece.errors?.required">
+                          Le num piece est obligatoire.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <label for="numOrigin" class="col-form-label"><span>*</span>
+                        N°Origine :</label>
+                      <input class="form-control" id="numOrigin" type="text"
+                             formControlName="numOrigin">
+                      <div *ngIf="numOrigin.invalid && (numOrigin.touched || numOrigin.dirty)"
+                           class="text text-danger">
+                        <div *ngIf="numOrigin.errors?.required">
+                          Le num origine est obligatoire.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <label for="date" class="col-form-label">
+                        Date :</label>
+                      <input class="form-control" id="date" type="date" formControlName="date">
+                      <div *ngIf="date.invalid && (date.touched || date.dirty)"
+                           class="text text-danger">
+                        <div *ngIf="date.errors?.required">
+                          Date est obligatoire.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <label class="col-form-label">
+                        Type :</label><br/>
+                      <p-dropdown
+                        [options]="types"
+                        optionLabel="name"
+                        [style]="{'width':'80%'}"
+                        [filter]="false"
+                        filterBy="name"
+                        [showClear]="true"
+                        placeholder="Sélectionner type"
+                        formControlName="type"
+                        optionValue="code"
+                        (onChange)="calculateTotal()">
+                        <ng-template let-cli pTemplate="item">
+                          <div class="country-item">
+                            <div>{{ cli.name }}</div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label class="col-form-label">
+                        Client :</label><br/>
+                      <p-dropdown
+                        [options]="listClients"
+                        [style]="{'width':'100%'}"
+                        optionLabel="name"
+                        [filter]="true"
+                        filterBy="name"
+                        [showClear]="true"
+                        placeholder="Sélectionner un client"
+                        formControlName="client"
+                        (onChange)="onClientSelect($event)">
+                        <ng-template let-cli pTemplate="item">
+                          <div class="country-item">
+                            <div>{{ cli.name }}</div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="totalDiscount" class="col-form-label">
+                        Total Remise:</label><br/>
+                      <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                     formControlName="totalDiscount" id="totalDiscount" inputStyleClass="bg-red" (onBlur)="calculateTotal()">
+                      </p-inputNumber>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="totalHT" class="col-form-label">
+                        Total H.T:</label><br/>
+                      <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                     formControlName="totalHT" id="totalHT" inputStyleClass="bg-red">
+                      </p-inputNumber>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="totalTVA" class="col-form-label">
+                        Total T.V.A:</label><br/>
+                      <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                     formControlName="totalTVA" id="totalTVA" inputStyleClass="bg-red">
+                      </p-inputNumber>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="totalTTC" class="col-form-label">
+                        Total T.T.C:</label><br/>
+                      <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                     formControlName="totalTTC" id="totalTTC" inputStyleClass="bg-red">
+                      </p-inputNumber>
+                    </div>
+                  </div>
+                </div>
+    </fieldset>
+    <br />
+    <fieldset class="text-semibold">
+                <legend><i class="icon-reading position-left"></i> Détails
+                  <i style="float: right;">
+                    <button type="button" class="btn btn-success"
+                            (click)="addNewValue()" (click)="addDetail()">Ajouter</button>
+                  </i>
+                </legend>
+
+                <div class="digital-add needs-validation">
+                  <div formArrayName="detailsFacture"
+                       *ngFor="let item of factureClientForm.get('detailsFacture')['controls']; let i = index;">
+                    <div [formGroupName]="i">
+                      <div class="form-group row">
+                        <div class="col-md-1">
+                          <label *ngIf="i == 0" for="rating" class="col-form-label">Ordre :</label>
+                          <input class="form-control" id="rating" type="number" formControlName="rating" >
+                        </div>
+                        <div class="col-md-3" *ngIf="!item.value.isDescription">
+                          <label *ngIf="i == 0" class="col-form-label">Produit :</label>
+                          <p-dropdown
+                            [options]="listProducts"
+                            [style]="{'width':'100%'}"
+                            optionLabel="name"
+                            [filter]="true"
+                            filterBy="name"
+                            [showClear]="true"
+                            placeholder="Produit"
+                            formControlName="product"
+                            (onChange)="onItemSelect($event,i)">
+                            <ng-template let-prod pTemplate="item">
+                              <div class="country-item">
+                                <div>{{ prod.name }}</div>
+                              </div>
+                            </ng-template>
+                          </p-dropdown>
+                        </div>
+                        <div class="col-md-3" *ngIf="item.value.isDescription">
+                          <label *ngIf="i == 0" for="description" class="col-form-label">Description :</label>
+                          <input class="form-control" id="description" type="text" formControlName="description">
+                        </div>
+                        <p-checkbox name="isDescription" id="isDescription" [style.margin-top.px]="marginCheckBox[i]"
+                                    [formControl]="item.controls['isDescription']" binary="false"></p-checkbox>
+                        <div class="col-md-1">
+                          <label *ngIf="i == 0"  for="quantity" class="col-form-label">Qté :<br></label>
+                          <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" formControlName="quantity" id="quantity"
+                                         (onBlur)="calculateMultiply(i)" [inputStyle]="{direction:'rtl', width: '90px'}">
+                          </p-inputNumber>
+                        </div>
+                        <div class="col-md-2">
+                          <label *ngIf="i == 0"  for="price" class="col-form-label">Prix :<br></label>
+                          <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" formControlName="price" id="price"
+                                         (onBlur)="calculateMultiply(i)" inputStyleClass="bg-red">
+                          </p-inputNumber>
+                        </div>
+                        <div class="col-md-1">
+                          <label *ngIf="i == 0"  for="tva" class="col-form-label">Tva :<br></label>
+                          <p-inputNumber prefix="%" formControlName="tva" id="tva"
+                                         (onBlur)="calculateMultiply(i)"  [inputStyle]="{direction:'rtl', width: '90px'}">
+                          </p-inputNumber>
+                        </div>
+                        <div class="col-md-2">
+                          <label *ngIf="i == 0"  for="total" class="col-form-label">
+                            Total :<br></label>
+                          <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                         formControlName="total" id="total" inputStyleClass="bg-red">
+                          </p-inputNumber>
+                        </div>
+                          <a (click)="removeValue(i)"><i [style.margin-top.px]="marginCheckBox[i]" style="color: red;"
+                                                         class="pi pi-times"></i></a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </fieldset>
+  </div>
+<div class="modal-footer">
+  <div class="product-buttons text-center">
+    <button type="submit" class="btn btn-primary mr-1">Enregistrer</button>&nbsp;&nbsp;
+    <button class="btn btn-secondary" type="button" data-dismiss="modal"
+            (click)="modal.dismiss('Cross click')">Annuler</button>
+  </div>
+</div>
+</form>

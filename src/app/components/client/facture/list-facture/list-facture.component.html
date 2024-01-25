@@ -1,0 +1,106 @@
+<p-toast></p-toast>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card tab2-card">
+        <div class="card-body">
+          <div class="p-d-flex p-ai-center p-jc-between">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" style="width: 160%;"
+                                   (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                        </span>
+
+            <div style="float: right;">
+              <button class="btn btn-primary mr-1 mb-3" style="font-size: 25px" (click)="addFacture()">+</button>
+            </div>
+          </div><br />
+          <div class="clearfix"></div>
+          <div class="card">
+            <p-table #dt2 [value]="factureClients" styleClass="p-datatable-sm" selectionMode="multiple" [metaKeySelection]="true"
+                     [paginator]="true" [rows]="40" [scrollable]="true" scrollHeight="700px"
+                     [globalFilterFields]="['id','numPiece','numOrigin','date','client.name','client.ice','totalTTC','totalHT','totalTVA','totalDiscount']"
+                     responsiveLayout="scroll" [rowHover]="true" dataKey="id" [resizableColumns]="true"
+                     [autoLayout]="true" [showCurrentPageReport]="true">
+              <ng-template pTemplate="header">
+                <tr style="font-size: 14px;">
+                  <th *ngFor="let col of atrFacture" pSortableColumn="{{col.field}}"
+                      [style.width]="col.width" [style.text-align]="col.position">
+                    {{col.header}}
+                  </th>
+                  <th style="width: 2%"></th>
+                  <th style="width: 10%">Action</th>
+                </tr>
+
+              </ng-template>
+              <ng-template pTemplate="body" let-facture>
+                <tr style="height: 2rem;font-size: 14px;" [pSelectableRow]="facture" (dblclick)="onRowDblClick($event, facture)">
+                  <td style="width: 2%" *ngIf="facture.verified">v</td>
+                  <td style="width: 2%" *ngIf="!facture.verified">0</td>
+                  <td style="width: 3%">{{facture.numPiece}}</td>
+                  <td style="width: 3%">{{facture.numOrigin}}</td>
+                  <td style="width: 5%;">{{facture.date | date: 'dd/MM/yyyy'}}</td>
+                  <td style="width: 13%">{{facture.client?.name}}</td>
+                  <td style="width: 10%">{{facture.client?.ice}}</td>
+                  <td style="text-align:right;width: 5%">{{facture.totalTTC| number : '1.2-2' | removeComma}}</td>
+                  <td style="text-align:right;width: 5%">{{facture.totalHT | number : '1.2-2' | removeComma}}</td>
+                  <td style="text-align:right;width: 5%">{{facture.totalTVA | number : '1.2-2' | removeComma}}</td>
+                  <td style="text-align:right;width: 5%" [innerHTML]="facture.totalDiscount != null ? (facture.totalDiscount | number: '1.2-2' | removeComma) : (0 | number: '1.2-2' | removeComma)"></td>
+                  <td style="width: 2%"></td>
+                  <td style="width: 10%">
+                    <a href="javascript:;" *ngIf="!facture.verified" (click)="onClickVerifiedFacture(facture)" title="Valider" class="text text-success"><i class="fa fa-check"></i>&nbsp;|&nbsp;</a>
+                    <a href="javascript:;" *ngIf="facture.verified" (click)="onClickUnVerifiedFacture(facture)" title="Devalider" class="text text-primary"><i class="fa fa-check-square-o"></i>&nbsp;|&nbsp;</a>
+                    <a (click)="onClickEditFacture(facture)" title="Modifier" href="javascript:;" class="text text-warning"><i class="fa fa-edit"></i>&nbsp;|&nbsp;</a>
+                    <a (click)="setFactureToDelete(facture)" (click)="open(deleteModal)" href="javascript:;" title="Supprimer" vclass="text text-danger"><i class="fa fa-trash"></i>&nbsp;|&nbsp;</a>
+                    <a (click)="printFacture(facture)" href="javascript:;" title="Imprimer" class="text text-success"><i class="fa fa-print"></i>&nbsp;|&nbsp;</a>
+                    <a (click)="download(facture)" href="javascript:;" title="Télécharger" class="text text-info"><i class="fa fa-download">&nbsp;|&nbsp;</i></a>
+                    <a (click)="onClickPayment(facture)" title="Reglement" [class.text-danger]="facture.totalAmountPayment !== facture.totalTTC" [class.text-info]="facture.totalAmountPayment === facture.totalTTC" href="javascript:;"><i class="fa fa-money"></i></a>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <ng-template #deleteModal let-modal>
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title f-w-600" id="myModal_delete_produit">Supprimer la facture
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="container" style="padding: 20px 20px;">
+                    <div style="text-align: center;margin-bottom: 15px;  ">
+                      <i class="fa fa-exclamation-triangle fa-5x"
+                         style="text-align: center; color: red;" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div style="margin-bottom: 20px;">
+                    <h4 style="text-align: center;">
+                      Êtes-vous sûr?
+                    </h4>
+                  </div>
+                  <div style="text-align: center; color: whitesmoke; margin-bottom: 20px;">
+                    <p style="line-height:15px;">
+                      Voulez-vous vraiment supprimer cet enregistrement ? Ce processus ne peut pas
+                      être annulé.</p>
+                  </div>
+                </div>
+                <div class="modal-footer" style="text-align: center;">
+                  <button type="button" class="btn btn-primary" href="javascript:;"
+                          (click)="onClickDeleteFacture()" (click)="modal.dismiss('Cross click')">
+                    Supprimer
+                  </button>
+                  &nbsp;
+                  <button type="button" class="btn btn-secondary"
+                          (click)="modal.dismiss('Cross click')" href="javascript:;" data-dismiss="modal">
+
+                    Annuler
+                  </button>
+                </div>
+              </div>
+
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

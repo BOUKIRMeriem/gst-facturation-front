@@ -1,0 +1,31 @@
+const { app, BrowserWindow } = require("electron");
+const path = require("path");
+const url = require("url");
+  
+let win;
+function createWindow() {
+  win = new BrowserWindow({
+    show: false,
+  });
+  win.maximize();
+  // load the dist folder from Angular
+  win.loadURL(
+    url.format({
+      
+      // compiled version of our app
+      pathname: path.join(__dirname, '/gst-com/index.html'), 
+      protocol: "file:",
+      slashes: true
+    })
+  );
+  win.on("closed", () => {
+    win = null;
+  });
+}
+app.on("ready", createWindow);
+// If you are using MACOS, we have to quit the app manually 
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
+});

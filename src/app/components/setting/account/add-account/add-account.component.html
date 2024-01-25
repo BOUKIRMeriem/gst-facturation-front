@@ -1,0 +1,68 @@
+<form [formGroup]="accountForm" *ngIf="accountForm" (ngSubmit)="save()" novalidate>
+  <div class="modal-header">
+    <h5 *ngIf="isAddMode">Ajouter Compte</h5>
+    <h5 *ngIf="!isAddMode">Modifier Compte</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="digital-add needs-validation">
+      <div class="form-group row">
+        <div class="col-xl-3">
+          <label for="email" class="col-form-label"><span>*</span>
+            Email :</label>
+          <input class="form-control" id="email" type="email" required="" formControlName="email">
+          <div *ngIf="email.invalid && (email.touched || email.dirty)" class="text text-danger">
+
+            <div *ngIf="email.errors?.required">
+              Email est obligatoire.
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3" *ngIf="isAddMode">
+          <label for="password" class="col-form-label">
+            Mot de passe :</label>
+          <input class="form-control" id="password" type="password" formControlName="password">
+          <div *ngIf="password.invalid && (password.touched || password.dirty)" class="text text-danger">
+
+            <div *ngIf="password.errors?.required">
+              Mot de passe est obligatoire.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div formGroupName="user">
+        <div class="form-group row">
+          <div class="col-xl-3">
+            <label for="firstName" class="col-form-label">
+              Prenom :</label>
+            <input class="form-control" id="firstName" type="text" formControlName="firstName" required>
+          </div>
+          <div class="col-xl-3">
+            <label for="lastName" class="col-form-label">
+              Nom :</label>
+            <input class="form-control" id="lastName" type="text" formControlName="lastName" required>
+          </div>
+          <div class="col-xl-3">
+            <label for="userName" class="col-form-label">
+              Nom d'utilisateur :</label>
+            <input class="form-control" id="userName" type="text" formControlName="userName" required>
+          </div>
+          <div class="col-xl-3">
+            <label for="phoneNumber" class="col-form-label">
+              Téléphone :</label>
+            <input class="form-control" id="phoneNumber" type="text" formControlName="phoneNumber" required>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="product-buttons text-center">
+      <button type="submit" class="btn btn-primary mr-1">Enregistrer</button>&nbsp;&nbsp;
+      <button class="btn btn-secondary" type="button" data-dismiss="modal"
+              (click)="modal.dismiss('Cross click')">Annuler</button>
+    </div>
+  </div>
+</form>

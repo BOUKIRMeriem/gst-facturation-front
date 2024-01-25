@@ -1,0 +1,108 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card tab2-card">
+        <div class="card-body">
+          <ngb-tabset class="tab-coupon profile-tabs" #tabset="ngbTabset" (tabChange)="onTabChange($event)">
+            <ngb-tab id="tab-client">
+              <ng-template ngbTabTitle>
+                <app-feather-icons [icon]="'box'"></app-feather-icons>CLIENT
+              </ng-template>
+              <ng-template ngbTabContent>
+                <form [formGroup]="clientForm" *ngIf="clientForm">
+                  <div>
+
+                    <div class="card-header">
+                      <h5 *ngIf="isAddMode">Ajouter un client</h5>
+                      <h5 *ngIf="!isAddMode">Modifier un client</h5>
+                    </div>
+                    <div class="card-body">
+                      <div class="digital-add needs-validation">
+                        <div class="form-group row">
+                          <div class="col-xl-3">
+                            <label for="code" class="col-form-label"><span>*</span>
+                              Compte :</label>
+                            <input class="form-control" id="code" type="text" required="" formControlName="code">
+                            <div *ngIf="code.invalid && (code.touched || code.dirty)" class="text text-danger">
+
+                              <div *ngIf="code.errors?.required">
+                                Le numéro de compte est obligatoire.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xl-3">
+                            <label for="name" class="col-form-label"><span>*</span>
+                              Nom :</label>
+                            <input class="form-control" id="name" type="text" required="" formControlName="name">
+                            <div *ngIf="name.invalid && (name.touched || name.dirty)" class="text text-danger">
+
+                              <div *ngIf="name.errors?.required">
+                                Le nom est obligatoire.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xl-3">
+                            <label for="email" class="col-form-label">
+                              Email :</label>
+                            <input class="form-control" id="email" type="text" formControlName="email">
+                          </div>
+                          <div class="col-xl-3">
+                            <label for="email" class="col-form-label">
+                              ICE :</label>
+                            <input class="form-control" id="ice" type="text" formControlName="ice">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <div class="col-xl-3">
+                            <label for="address" class="col-form-label">
+                              Adresse :</label>
+                            <input class="form-control" id="address" type="text" formControlName="address">
+                          </div>
+                          <div class="col-xl-2">
+                            <label for="phone" class="col-form-label">
+                              Téléphone :</label>
+                            <input class="form-control" id="phone" type="text" formControlName="phone">
+                          </div>
+                          <div class="col-xl-2">
+                            <label for="fax" class="col-form-label">
+                              Solde :</label>
+                            <input class="form-control" id="solde" type="text" formControlName="solde">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-0">
+                    <div class="product-buttons text-center">
+                      <button type="button" *ngIf="isAddMode" class="btn btn-primary mr-1"
+                        (click)="addClient()">Ajouter</button>
+                      <button type="button" *ngIf="!isAddMode" class="btn btn-primary mr-1"
+                        (click)="editClient()">Modifier</button>&nbsp;&nbsp;
+                      <button type="button" (click)="annuler()" class="btn btn-light">Annuler</button>
+                    </div>
+                  </div>
+                </form>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-facture">
+              <ng-template ngbTabTitle>
+                <i data-feather="dollar-sign"></i> FACTURES
+              </ng-template>
+              <ng-template ngbTabContent>
+                <app-list-facture [clientId]="clientId" [isClient]=true></app-list-facture>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-payment">
+              <ng-template ngbTabTitle>
+                <app-feather-icons [icon]="'clipboard'"></app-feather-icons>REGLEMENT
+              </ng-template>
+              <ng-template ngbTabContent>
+                <app-list-all-payment [clientId]="clientId" [isClient]=true></app-list-all-payment>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

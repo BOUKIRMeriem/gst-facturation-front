@@ -1,0 +1,73 @@
+<form [formGroup]="productForm" *ngIf="productForm" (ngSubmit)="save()" novalidate>
+  <div class="modal-header">
+    <h5 *ngIf="isAddMode">Ajouter Produit</h5>
+    <h5 *ngIf="!isAddMode">Modifier Produit</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <fieldset class="text-semibold">
+      <div class="digital-add needs-validation">
+        <div class="form-group row">
+          <div class="col-xl-4">
+            <label for="reference" class="col-form-label"><span>*</span>
+              Référence :</label>
+            <input class="form-control" id="reference" type="text"
+                   formControlName="reference">
+            <div *ngIf="reference.invalid && (reference.touched || reference.dirty)"
+                 class="text text-danger">
+              <div *ngIf="reference.errors?.required">
+                La référence est obligatoire.
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <label for="name" class="col-form-label"><span>*</span>Designation :</label>
+            <input class="form-control" id="name" type="text" formControlName="name">
+            <div *ngIf="name.invalid && (name.touched || name.dirty)" class="text text-danger">
+              <div *ngIf="name.errors?.required">
+                La désignation est obligatoire.</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-xl-3">
+            <label for="sellingPrice" class="col-form-label">
+              Prix Vente:</label><br/>
+            <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                           formControlName="sellingPrice" id="sellingPrice" inputStyleClass="bg-red">
+            </p-inputNumber>
+          </div>
+          <div class="col-xl-3">
+            <label for="purchasePrice" class="col-form-label">Prix Achat:</label><br/>
+            <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                           formControlName="purchasePrice" id="purchasePrice" inputStyleClass="bg-red" >
+            </p-inputNumber>
+          </div>
+          <div class="col-xl-3">
+            <label for="departureQuantity" class="col-form-label">
+              Qte Depart :</label><br/>
+            <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                           formControlName="departureQuantity" id="departureQuantity" inputStyleClass="bg-red">
+            </p-inputNumber>
+          </div>
+          <div class="col-xl-3">
+            <label for="totalQuantity" class="col-form-label">
+              Stock :</label><br/>
+            <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                           formControlName="totalQuantity" id="totalQuantity" inputStyleClass="bg-red">
+            </p-inputNumber>
+          </div>
+        </div>
+      </div>
+  </fieldset>
+</div>
+  <div class="modal-footer">
+    <div class="product-buttons text-center">
+      <button type="submit" class="btn btn-primary mr-1">Enregistrer</button>&nbsp;&nbsp;
+      <button class="btn btn-secondary" type="button" data-dismiss="modal"
+              (click)="modal.dismiss('Cross click')">Annuler</button>
+    </div>
+  </div>
+</form>

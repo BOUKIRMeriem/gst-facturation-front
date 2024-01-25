@@ -1,0 +1,547 @@
+{
+	"footer": {
+		"copyright": "Copyright",
+		"hello": "Hello",
+		"madeBy": "Hand crafted by SAT & made with",
+		"rights": "SAT All rights reserved"
+	},
+	"sidebar": {
+		"coupons": "Coupons",
+		"dashboard": "Dashboard",
+		"invoice": "Invoice",
+		"localization": "",
+		"login": "Login",
+		"media": "Media",
+		"menus": "Menus",
+		"pages": "Pages",
+		"products": "Products",
+		"reports": "Reports",
+		"sales": "Sales",
+		"settings": "Settings",
+		"vendors": "Vendors"
+	},
+	"button": {
+		"add": "Add",
+		"save": "Save",
+		"discard": "Discard",
+		"edit": "Edit",
+		"go_to_list": "Go to list",
+		"cancel": "Cancel",
+		"delete": "Delete",
+		"go_to_product": "Go to product"
+	},
+  Localization
+	"radio": {
+		"value1": "Yes",
+		"value2": "No"
+	},
+	"dashboard": {
+		"total": "Total",
+		"row1": {
+			"div1": {
+				"title": "Product"
+			},
+			"div2": {
+				"title": "Seasonal tariff"
+			},
+			"div3": {
+				"title": "Fee schedule"
+			},
+			"div4": {
+				"title": "Tariff variable unit"
+			}
+		},
+		"row2": {
+			"div1": {
+				"title": "Annotation"
+			},
+			"div2": {
+				"title": "Distinction"
+			},
+			"div3": {
+				"title": "Premiumization"
+			},
+			"div4": {
+				"title": "Criterion computable"
+			}
+		},
+		"row3": {
+			"div1": {
+				"title": "Expedition"
+			},
+			"div2": {
+				"title": "Indicating Additional costs"
+			},
+			"div3": {
+				"title": "Indicating Promo"
+			},
+			"div4": {
+				"title": "Indicating Stock"
+			}
+		},
+		"row4": {
+			"div1": {
+				"title": "Instance characteristic"
+			},
+			"div2": {
+				"title": "Variant instance characteristic"
+			},
+			"div3": {
+				"title": "Instance classification"
+			},
+			"div4": {
+				"title": "Multimedia content"
+			}
+		},
+		"row5": {
+			"div1": {
+				"title": "Internal instance comment"
+			},
+			"div2": {
+				"title": "Brand"
+			},
+			"div3": {
+				"title": "Warranty insurance"
+			},
+			"div4": {
+				"title": "Associated product"
+			}
+		},
+		"row6": {
+			"div1": {
+				"title": "Product making"
+			},
+			"div2": {
+				"title": "Horizontal variant"
+			},
+			"div3": {
+				"title": "User"
+			},
+			"div4": {
+				"title": ""
+			}
+		}
+	},
+	"ind_promo": {
+		"fields": {
+			"ref_pricing_rule": "Pricing Rule Reference",
+			"interessement": {
+				"global_value": "Global value",
+				"advantage": {
+					"type": "Type",
+					"designation": "Designation",
+					"description": "Description",
+					"value": "Value"
+				}
+			},
+			"reduction": {
+				"type": "Type",
+				"valeur": "Value"
+			},
+			"period_debut": "Start date",
+			"period_fin": "End date",
+			"etat_pricing_rule": "Pricing rule status"
+		},
+		"validators": {
+			"ref_pricing_rule": {
+				"required": "The pricing rule reference is required"
+			},
+			"reduction": {
+				"type": {
+					"required": "The type is required"
+				},
+				"valeur": {
+					"required": "The value is required"
+				}
+			},
+			"interessement": {
+				"global_value": {
+					"required": "The global value is required"
+				},
+				"advantage": {
+					"type": {
+						"required": "The type is required"
+					},
+					"designation": {
+						"required": "The designation is required"
+					},
+					"description": {
+						"required": "The description is required"
+					},
+					"value": {
+						"required": "The value is required"
+					}
+				}
+			},
+			"period_debut": {
+				"required": "The start date is required",
+				"invalid": "The start date is required (Format: dd/mm/yyyy)"
+			},
+			"period_fin": {
+				"required": "The end date is required",
+				"invalid": "The enddate is required (Format: dd/mm/yyyy)"
+			},
+			"etat_pricing_rule": {
+				"required": "The pricing rule  status is required"
+			}
+		},
+		"add": {
+			"title": "Add Promo indicating"
+		},
+		"edit": {
+			"title": "Edit Promo indicating"
+		},
+		"list": {
+			"title": "Promo indicating list"
+		},
+		"details": {
+			"title": "Details Promo indicating"
+		},
+		"ngb_tab1": {
+			"title": "Main information"
+		},
+		"ngb_tab2": {
+			"title": "Reduction"
+		},
+		"ngb_tab3": {
+			"title": "Interessement",
+			"subtitle": "Advantages of interessement",
+			"button": {
+				"add": "Add advantage to interessement"
+			}
+		}
+	},
+	"grille_tarifaire": {
+		"fields": {
+			"ref_grille": "Reference",
+			"qte_inf": "Min qty",
+			"qte_sup": "Max qty",
+			"tarif_unitaire_ht": "Unit Tariff ET",
+			"valeur": "Value",
+			"monnaie": "Currency"
+		},
+		"validators": {
+			"ref_grille": {
+				"required": "The Reference is required"
+			},
+			"qte_inf": {
+				"required": "The Min Qty is required",
+				"min": "The Min Qty must be great than 0",
+				"integer": "The Min Qty must be an integer",
+				"invalid": "The Min Qty must be less than the Max Qty"
+			},
+			"qte_sup": {
+				"required": "The Max Qty is required",
+				"min": "The Max Qty must be great than 0",
+				"integer": "The Max Qty must be an integer",
+				"invalid": "The Max Qty must be great than the Min Qty"
+			},
+			"tarif_unitaire_ht": {
+				"required": "The Unit Tariff ET is required"
+			},
+			"valeur": {
+				"required": "The Value is required"
+			},
+			"monnaie": {
+				"required": "The Currency is required"
+			}
+		},
+		"div1": {
+			"title": "Main Information"
+		},
+		"div2": {
+			"title": "Complementary Information"
+		},
+		"add": {},
+		"edit": {},
+		"list": {
+			"title": "Fee Schedule list",
+			"popup": {
+				"title": "Delete the fee schedule",
+				"subtitle": "Are you sure?",
+				"message": "Do you really want to delete this record? This process cannot be cancelled."
+			}
+		}
+	},
+	"ind_frais_add": {
+		"fields": {
+			"refFrais": "Reference",
+			"natureCoutAdd": "Nature",
+			"valeurCoutAdd": "Value ",
+			"description": "Description",
+			"commentaire": "Comment"
+		},
+		"validators": {
+			"refFrais": {
+				"required": "The Reference is required"
+			},
+			"natureCoutAdd": {
+				"required": "The Nature is required"
+			},
+			"valeurCoutAdd": {
+				"required": "The Value is required"
+			},
+			"description": {
+				"required": "The Description is required"
+			},
+			"commentaire": {
+				"required": "The Comment is required"
+			}
+		},
+		"div1": {
+			"title": "Main Information"
+		},
+		"div2": {
+			"title": "Complementary Information"
+		},
+		"add": {},
+		"edit": {},
+		"list": {
+			"title": "Additionnel fee indicating list",
+			"popup": {
+				"title": "Delete the additionnal fee indicating",
+				"subtitle": "Are you sure?",
+				"message": "Do you really want to delete this record? This process cannot be cancelled."
+			}
+		}
+	},
+	"tarif_saisonnier": {
+		"fields": {},
+		"validators": {},
+		"add": {},
+		"edit": {},
+		"details": {},
+		"list": {}
+	},
+	"annotation": {
+		"fields": {
+			"date": "Date",
+			"email": "Email",
+			"note": "Note",
+			"commentaire": "Comment"
+		},
+		"validators": {
+			"date": {
+				"required": "The date is required",
+				"invalid": "The date is not valid. (Format: dd/mm/yyyy)"
+			},
+			"email": {
+				"required": "The email is required",
+				"invalid": "The email is not valid (Eg: xyz@gmail.com)"
+			},
+			"note": {
+				"required": "The note is required"
+			},
+			"commentaire": {
+				"required": "The comment is required"
+			}
+		},
+		"div1": {
+			"title": "Main information"
+		},
+		"div2": {
+			"title": "Complementary information"
+		}
+	},
+	"cont_mmedia":{
+		"fields":{
+			"urlDoc":"Document",
+			"refContenu":"Reference",
+			"typeContenu":"Content Type",
+			"titreDoc":"Title",
+			"formatDoc":"Format",
+			"tailleDoc":"Size",
+			"uniteTaille":"Unit Size",
+			"provenanceInterne":"Internal"
+		},
+		"validators":{
+			"urlDoc":{
+				"required":"The document is required"
+			},
+			"refContenu":{
+				"required":"The reference is required"
+			},
+			"typeContenu":{
+				"required":"The content type is required"
+			},
+			"titreDoc":{
+				"required":"The title is required"
+			},
+			"formatDoc":{
+				"required":"The format is required"
+			},
+			"tailleDoc":{
+				"required":"The size is required"
+			},
+			"uniteTaille":{
+				"required":"The unit size is required"
+			},
+			"provenanceInterne":{
+				"required":"The internal is required"
+			}
+		},
+		"div1":{
+			"title":"Main Information"
+		},
+		"div2":{
+			"title":"Complementary Information"
+		},
+		"list": {
+			"title": "Multimedia content list",
+			"popup": {
+				"title": "Delete the multimedia content",
+				"subtitle": "Are you sure?",
+				"message": "Do you really want to delete this record? This process cannot be cancelled."
+			},
+			"button":{
+				"add":"Add content multimedia"
+			}
+		}
+
+	},
+	"critere_calculable":{
+		"fields":{
+			"groupeCritere":"Group",
+			"refCritere":"Reference",
+			"uniteValeur":"Unit Value",
+			"label":"Label",
+			"valeur":"Value"
+		},
+		"validators":{
+			"groupeCritere":{
+				"required":"The Group is required"
+			},
+			"refCritere":{
+				"required":"The Reference is required"
+			},
+			"uniteValeur":{
+				"required":"The Unit Value is required"
+			},
+			"label":{
+				"required":"The Label is required"
+			},
+			"valeur":{
+				"required":"The Value is required"
+			}
+		},
+		"div1":{
+			"title":"Main Information"
+		},
+		"div2":{
+			"title":"Complementary Information"
+		},
+		"list": {
+			"title": "Computable Criteria list",
+			"popup": {
+				"title": "Delete the computable criteria",
+				"subtitle": "Are you sure?",
+				"message": "Do you really want to delete this record? This process cannot be cancelled."
+			},
+			"button":{
+				"add":"Add Computable Criteria"
+			}
+		}
+	},
+	"inst_classif":{
+		"fields":{
+			"ref_classif_valeur":"Reference",
+			"label_texte":"Label",
+			"domaine":"Domaine",
+			"valeur":"Value"
+		},
+		"validators":{
+			"ref_classif_valeur":{
+				"required":"The Reference is required"
+			},
+			"label_texte":{
+				"required":"The Label is required"
+			},
+			"domaine":{
+				"required":"The Domaine is required"
+			},
+			"valeur":{
+				"required":"The Value is required"
+			}
+		},
+		"div1":{
+			"title":"Main Information"
+		},
+		"div2":{
+			"title":"Complementary Information"
+		},
+		"list": {
+			"title": "Classification instance list",
+			"popup": {
+				"title": "Delete the classification instance",
+				"subtitle": "Are you sure?",
+				"message": "Do you really want to delete this record? This process cannot be cancelled."
+			},
+			"button":{
+				"add":"Add Classification Instance"
+			}
+		}
+	},
+	"inst_caract":{
+		"fields":{
+			"groupeCaracterist":"Group",
+			"refInstCaracterist":"Reference",
+			"uniteCaracterist":"Unit",
+			"labelCaracterist":"Label",
+			"valeurCaracterist":"Value",
+			"ordreCaracterist":"Order",
+			"coutAdditionnel":"Additionnal Fee",
+			"typeCoutAdditionnel":"Additionnal Fee Type",
+			"valeurCoutAdditionnel":"Additionnal Fee Value",
+			"affichagePrive":"Private display"
+		},
+		"validators":{
+			"groupeCaracterist":{
+				"required":"The Group is required"
+			},
+			"refInstCaracterist":{
+				"required":"The Reference is required"
+			},
+			"uniteCaracterist":{
+				"required":"The Unit is required"
+			},
+			"labelCaracterist":{
+				"required":"The Label is required"
+			},
+			"valeurCaracterist":{
+				"required":"The Value is required"
+			},
+			"ordreCaracterist":{
+				"required":"The Order is required"
+			},
+			"coutAdditionnel":{
+				"required":"The Additionnal Fee is required"
+			},
+			"typeCoutAdditionnel":{
+				"required":"The Additionnal Fee Type is required"
+			},
+			"valeurCoutAdditionnel":{
+				"required":"The Additionnal Fee Value is required"
+			},
+			"affichagePrive":{
+				"required":"The Private display Value is required"
+			}
+		},
+		"div1":{
+			"title":"Main Information"
+		},
+		"div2":{
+			"title":"Complementary Information"
+		},
+		"list": {
+			"title": "Characteristic instance list",
+			"popup": {
+				"title": "Delete the characteristic instance",
+				"subtitle": "Are you sure?",
+				"message": "Do you really want to delete this record? This process cannot be cancelled."
+			},
+			"button":{
+				"add":"Add Characteristic Instance"
+			}
+		}
+	}
+}

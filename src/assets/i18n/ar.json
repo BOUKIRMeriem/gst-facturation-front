@@ -1,0 +1,23 @@
+{
+	"footer": {
+		"copyright": "حقوق النشر",
+		"hello": "مرحبا",
+		"madeBy": "صنع يدويًا بواسطة SAT ومصنوع من",
+		"rights": "SAT جميع الحقوق محفوظة"
+	},
+	"sidebar": {
+		"coupons": "كوبونات",
+		"dashboard": "لوحة القيادة",
+		"invoice": "فاتورة",
+		"localization": "الموقع",
+		"login": "تسجيل الدخول",
+		"media": "وسائل الإعلام",
+		"menus": "القوائم",
+		"pages": "صفحات",
+		"products": "منتجات",
+		"reports": "تقارير",
+		"sales": "مبيعات",
+		"settings": "الإعدادات",
+		"vendors": "الباعة"
+	}
+}

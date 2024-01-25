@@ -1,0 +1,23 @@
+{
+	"footer": {
+		"copyright": "Copyright",
+		"hello": "Bonjour",
+		"madeBy": "Coder par SAT et avec",
+		"rights": "SAT tous droits reservés"
+	},
+	"sidebar": {
+		"coupons": "Coupons",
+		"dashboard": "Tableau de bord",
+		"invoice": "Facture",
+		"localization": "Localisation",
+		"login": "Connexion",
+		"media": "Médias",
+		"menus": "Menus",
+		"pages": "Pages",
+		"products": "Produits",
+		"reports": "Rapports",
+		"sales": "Ventes",
+		"settings": "Réglages",
+		"vendors": "Vendeurs"
+	}
+}
